@@ -1,17 +1,23 @@
 # Choix des ISO
 
 
-## **Server 1 (Rocky-Linux) :**
-- Hébergement web
-
-## **Server 2 (Windows Server) :**
+## **VM 1 (Windows Server) :**
 - base de donnée
 - server de fichiers
 - controleur de domaine
 
-## **Server 3 (PFsense) :**
+
+## **VM 2 (PFsense) :**
 - routeur 
 - pare-feu
+
+
+## **VM 3 (Rocky-Linux) :**
+- Hébergement web
+
+
+## **VM 4 (Rocky-Linux) :**
+- PC basé sur Bordeaux
 
 ## Imprimante :
 Avec l'active directory
