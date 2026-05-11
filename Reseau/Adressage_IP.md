@@ -1,6 +1,6 @@
 # Tableau d'adressage IP
 
-## 🏢 Site Principal — Aix-en-Provence
+## Site Principal — Aix-en-Provence
 
 ### Équipements réseau & serveurs
 
@@ -40,10 +40,7 @@
 
 ---
 
-## 🏪 Sites distants — 12 agences commerciales
-
-> Chaque site dispose d'un pfSense, un switch, 5 postes Windows et 1 imprimante.
-> Le plan d'adressage suit le schéma **192.168.X.0/24** avec X = numéro du site (10 à 21).
+## Sites distants — 12 agences commerciales
 
 ### Vue d'ensemble des sites
 
@@ -83,11 +80,8 @@
 | DNS secondaire | 8.8.8.8 (Google) |
 | Durée du bail | 24h |
 
----
 
-## 🔒 VPN — Tunnels IPsec Site-to-Site
-
-> Chaque site distant est relié au site principal d'Aix-en-Provence via un tunnel VPN IPsec.
+## VPN — Tunnels IPsec Site-to-Site
 
 | Tunnel | Site source | Site destination | Réseau source | Réseau destination | Protocole |
 |---|---|---|---|---|---|
@@ -114,5 +108,3 @@
 | Hash | SHA-256 |
 | DH Group | 14 (2048 bits) |
 | Durée de vie SA | 28800s (Phase 1) / 3600s (Phase 2) |
-
----
