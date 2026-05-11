@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Connexion — Darri-Bolide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@300;400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <style>
+    .login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--black)}
+    .login-box{background:var(--panel);border:1px solid var(--border);padding:48px;width:100%;max-width:440px}
+    .login-logo{font-family:var(--font-head);font-size:28px;letter-spacing:3px;color:var(--white);margin-bottom:32px}
+    .login-logo span{color:var(--red)}
+    .form-group{margin-bottom:20px}
+    .form-label{display:block;font-family:var(--font-sub);font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--silver);margin-bottom:8px}
+    .form-input{width:100%;background:var(--dark);border:1px solid var(--border);color:var(--light);padding:12px 16px;font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s}
+    .form-input:focus{border-color:var(--red)}
+    .btn-login{width:100%;justify-content:center;margin-top:8px}
+    #login-err{color:var(--red);font-family:var(--font-sub);font-size:12px;letter-spacing:2px;margin-top:12px}
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-box">
+      <div class="login-logo">DARRI-<span>BOLIDE</span></div>
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="email" class="form-input" required autofocus/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Mot de passe</label>
+          <input type="password" id="password" class="form-input" required/>
+        </div>
+        <button type="submit" class="btn-primary btn-login">Se connecter</button>
+        <div id="login-err"></div>
+      </form>
+    </div>
+  </div>
+  <script src="/js/api.js"></script>
+  <script>
+    document.getElementById("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const err = document.getElementById("login-err");
+      err.textContent = "";
+      try {
+        const user = await Api.auth.login(
+          document.getElementById("email").value,
+          document.getElementById("password").value
+        );
+        const params = new URLSearchParams(window.location.search);
+        window.location.href = params.get("redirect") || "/vehicules.html";
+      } catch(e) {
+        err.textContent = "Email ou mot de passe incorrect";
+      }
+    });
+  </script>
+</body>
+</html>

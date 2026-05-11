@@ -5,25 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Darri-Bolide — Garages Automobiles</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="/css/style.css"/>
 </head>
 <body>
 
   <!-- ===== NAVIGATION ===== -->
   <nav>
-    <a href="#" class="nav-logo">
-      <span class="word-darri">Darri</span>
-      <span class="dash">-</span>
-      <span class="word-bolide">Bolide</span>
+    <a href="/index.html" class="nav-logo">
+      <span class="word-darri">Darri</span><span class="dash">-</span><span class="word-bolide">Bolide</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#services">Services</a></li>
-      <li><a href="#agences">Agences</a></li>
-      <li><a href="#occasions">Véhicules</a></li>
-      <li><a href="#temoignages">Avis</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="/index.html#services">Services</a></li>
+      <li><a href="/index.html#agences">Agences</a></li>
+      <li><a href="/vehicules.html">Véhicules</a></li>
+      <li><a href="/index.html#temoignages">Avis</a></li>
+      <li><a href="/index.html#contact">Contact</a></li>
     </ul>
-    <a href="#contact" class="nav-cta">Prendre RDV</a>
+    <div class="nav-right">
+      <div id="nav-auth">
+        <a href="/login.html" class="btn-ghost-sm">Connexion</a>
+        <a href="/index.html#contact" class="nav-cta">Prendre RDV</a>
+      </div>
+    </div>
   </nav>
 
   <!-- ===== HERO ===== -->
@@ -56,14 +59,14 @@
       </h1>
       <p class="hero-sub">13 agences à travers la France — Vente, entretien &amp; réparation automobile</p>
       <div class="hero-actions">
-        <a href="#occasions" class="btn-primary">
+        <a href="/vehicules.html" class="btn-primary">
           Voir nos véhicules
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <path d="M5 12h14M12 5l7 7-7 7"/>
           </svg>
         </a>
-        <a href="#agences" class="btn-secondary">
-          Trouver une agence
+        <a href="/estimation.html" class="btn-secondary">
+          Estimer mon véhicule
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
           </svg>
@@ -221,7 +224,7 @@
         <h2 class="promo-title">Reprise de votre<br><span>véhicule</span> au meilleur prix</h2>
         <p class="promo-desc">Estimez votre véhicule en ligne en moins de 2 minutes et bénéficiez d'une offre de reprise garantie 7 jours. Valable dans les 13 agences Darri-Bolide.</p>
         <div class="promo-actions">
-          <a href="#contact" class="btn-primary">
+          <a href="/estimation.html" class="btn-primary">
             Estimer mon véhicule
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -308,32 +311,32 @@
       <div>
         <div class="footer-col-title">Services</div>
         <ul class="footer-links">
-          <li><a href="#">Véhicules neufs</a></li>
-          <li><a href="#">Véhicules d'occasion</a></li>
-          <li><a href="#">Entretien &amp; réparation</a></li>
-          <li><a href="#">Carrosserie</a></li>
-          <li><a href="#">Financement</a></li>
+          <li><a href="/vehicules.html">Véhicules neufs</a></li>
+          <li><a href="/vehicules.html">Véhicules d'occasion</a></li>
+          <li><a href="/index.html#services">Entretien &amp; réparation</a></li>
+          <li><a href="/index.html#services">Carrosserie</a></li>
+          <li><a href="/index.html#services">Financement</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Agences</div>
         <ul class="footer-links">
-          <li><a href="#">Aix-en-Provence</a></li>
-          <li><a href="#">Bordeaux</a></li>
-          <li><a href="#">Paris</a></li>
-          <li><a href="#">Lyon</a></li>
-          <li><a href="#">Marseille</a></li>
-          <li><a href="#">+ 8 agences</a></li>
+          <li><a href="/index.html#agences">Aix-en-Provence</a></li>
+          <li><a href="/index.html#agences">Bordeaux</a></li>
+          <li><a href="/index.html#agences">Paris</a></li>
+          <li><a href="/index.html#agences">Lyon</a></li>
+          <li><a href="/index.html#agences">Marseille</a></li>
+          <li><a href="/index.html#agences">+ 8 agences</a></li>
         </ul>
       </div>
       <div>
         <div class="footer-col-title">Contact</div>
         <ul class="footer-links">
-          <li><a href="#">0800 000 000</a></li>
-          <li><a href="#">contact@darri-bolide.fr</a></li>
-          <li><a href="#">Prendre RDV</a></li>
-          <li><a href="#">Recrutement</a></li>
-          <li><a href="#">Presse</a></li>
+          <li><a href="tel:+33800000000">0800 000 000</a></li>
+          <li><a href="mailto:contact@darri-bolide.fr">contact@darri-bolide.fr</a></li>
+          <li><a href="/index.html#contact">Prendre RDV</a></li>
+          <li><a href="/index.html#contact">Recrutement</a></li>
+          <li><a href="/index.html#contact">Presse</a></li>
         </ul>
       </div>
     </div>
@@ -350,9 +353,19 @@
         <a href="#" class="social-btn" title="LinkedIn">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
         </a>
+        <a href="#" class="social-btn" title="Twitter">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2s9 5 20 5a9.5 9.5 0 00-9-5.5c4.75 2.25 7-7 7-7s1.1 1 2-1c1-2 1.5-4 1.5-4z"/></svg>
+        </a>
       </div>
     </div>
   </footer>
 
+  <script src="/js/api.js"></script>
+  <script>
+    // Mettre à jour la nav avec l'état de connexion au chargement
+    document.addEventListener("DOMContentLoaded", () => {
+      Api.helpers.updateNavAuth();
+    });
+  </script>
 </body>
 </html>

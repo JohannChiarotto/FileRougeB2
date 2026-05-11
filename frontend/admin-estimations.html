@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Demandes d'estimation — Darri-Bolide</title>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <style>
+    .admin-wrap { max-width: 1200px; margin: 120px auto 60px; padding: 0 16px; }
+    .admin-wrap h1 { margin-bottom: 24px; }
+    .req-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .req-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px 24px;
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .req-actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .req-actions select, .req-actions input {
+      background: var(--dark);
+      color: var(--light);
+      border: 1px solid var(--border);
+      padding: 8px 10px;
+    }
+    @media (max-width: 700px) {
+      .req-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      <span class="word-darri">Darri</span><span class="dash">-</span><span class="word-bolide">Bolide</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/vehicules.html">Véhicules</a></li>
+      <li><a href="/ajouter-vehicule.html">Ajouter véhicule</a></li>
+    </ul>
+    <div id="nav-auth"></div>
+  </nav>
+
+  <main class="admin-wrap">
+    <h1>Demandes d'estimation client</h1>
+    <div id="requests"></div>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/admin-estimations.js"></script>
+</body>
+</html>

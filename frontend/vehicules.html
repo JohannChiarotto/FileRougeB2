@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Véhicules — Darri-Bolide</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/vehicules.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="/index.html" class="nav-logo">
+      <span class="word-darri">Darri</span><span class="dash">-</span><span class="word-bolide">Bolide</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="/index.html#services">Services</a></li>
+      <li><a href="/index.html#agences">Agences</a></li>
+      <li><a href="/vehicules.html" class="active">Véhicules</a></li>
+      <li><a href="/index.html#temoignages">Avis</a></li>
+      <li><a href="/index.html#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div id="nav-auth">
+        <a href="/login.html" class="btn-ghost-sm">Connexion</a>
+        <a href="/index.html#contact" class="nav-cta">Prendre RDV</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HEADER -->
+  <header class="page-header">
+    <div class="page-header-bg"></div>
+    <div class="page-header-content">
+      <div class="page-header-label">Notre catalogue</div>
+      <h1 class="page-header-title">Véhicules <em>Disponibles</em></h1>
+      <p class="page-header-sub">Neufs et occasions — 13 agences en France</p>
+    </div>
+    <!-- Onglets neuf / occasion -->
+    <div class="catalogue-tabs">
+      <button class="tab-btn active" data-etat="">Tous</button>
+      <button class="tab-btn" data-etat="neuf">Véhicules Neufs</button>
+      <button class="tab-btn" data-etat="occasion">Véhicules d'Occasion</button>
+    </div>
+  </header>
+
+  <!-- MAIN LAYOUT -->
+  <div class="catalogue-layout">
+
+    <!-- FILTRES (sidebar) -->
+    <aside class="filters-panel" id="filters-panel">
+      <div class="filters-header">
+        <span class="filters-title">Filtres</span>
+        <button class="filters-reset" id="btn-reset-filters">Réinitialiser</button>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Recherche</label>
+        <input type="text" id="filter-search" class="filter-input" placeholder="Marque, modèle…"/>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Prix maximum</label>
+        <input type="range" id="filter-prix-max" min="0" max="100000" step="1000" value="100000" class="filter-range"/>
+        <div class="filter-range-val">Jusqu'à <strong id="prix-max-val">100 000 €</strong></div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Kilométrage max</label>
+        <input type="range" id="filter-km-max" min="0" max="300000" step="5000" value="300000" class="filter-range"/>
+        <div class="filter-range-val">Jusqu'à <strong id="km-max-val">300 000 km</strong></div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Énergie</label>
+        <div class="filter-chips" id="filter-energie">
+          <button class="chip active" data-val="">Toutes</button>
+          <button class="chip" data-val="essence">Essence</button>
+          <button class="chip" data-val="diesel">Diesel</button>
+          <button class="chip" data-val="electrique">Électrique</button>
+          <button class="chip" data-val="hybride">Hybride</button>
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Agence</label>
+        <select id="filter-agence" class="filter-select">
+          <option value="">Toutes les agences</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label class="filter-label">Année minimum</label>
+        <select id="filter-annee" class="filter-select">
+          <option value="">Toutes</option>
+        </select>
+      </div>
+
+      <button class="btn-primary btn-filter-apply" id="btn-apply-filters">
+        Appliquer les filtres
+      </button>
+    </aside>
+
+    <!-- LISTE VÉHICULES -->
+    <main class="catalogue-main">
+
+      <!-- Barre résultats + tri -->
+      <div class="results-bar">
+        <span class="results-count" id="results-count">Chargement…</span>
+        <div class="results-sort">
+          <label>Trier par</label>
+          <select id="sort-select" class="filter-select small">
+            <option value="created_at_desc">Plus récents</option>
+            <option value="prix_asc">Prix croissant</option>
+            <option value="prix_desc">Prix décroissant</option>
+            <option value="annee_desc">Année décroissante</option>
+            <option value="km_asc">Kilométrage</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Grille de véhicules -->
+      <div class="vehicules-grid" id="vehicules-grid">
+        <!-- Injecté par vehicules.js -->
+        <div class="grid-loader">
+          <div class="loader-spinner"></div>
+          <p>Chargement des véhicules…</p>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+
+  <!-- MODAL DÉTAIL VÉHICULE -->
+  <div class="modal-overlay" id="vehicle-modal" role="dialog" aria-modal="true" hidden>
+    <div class="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Fermer">✕</button>
+      <div class="modal-content" id="modal-content">
+        <!-- Injecté dynamiquement -->
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/vehicules.js"></script>
+</body>
+</html>

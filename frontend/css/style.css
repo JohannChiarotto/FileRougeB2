@@ -118,6 +118,24 @@ nav {
 }
 .nav-cta:hover { background: var(--red-hot); transform: translateY(-1px); }
 
+/* buttons that are 'ghost' style (border only) used in nav and elsewhere */
+.btn-ghost-sm {
+  font-family: var(--font-sub);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--silver);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  transition: border-color .2s, color .2s;
+}
+.btn-ghost-sm:hover { border-color: var(--silver); color: var(--white); }
+
+/* helper used previously only in vehicules.css */
+.nav-right { display: flex; align-items: center; gap: 12px; }
+
 /* ===================== HERO ===================== */
 .hero {
   min-height: 100vh;
@@ -504,7 +522,7 @@ nav {
   background: var(--red);
   color: var(--white);
   padding: 2px 6px;
-  margin-left: 25px;
+  margin-left: auto;
 }
 
 /* ===================== PROMO ===================== */
