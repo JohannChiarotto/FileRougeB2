@@ -23,7 +23,7 @@ def create_app(env: str = "default") -> Flask:
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # ── Import des modèles (nécessaire pour Flask-Migrate) ──────
-    from app.models import utilisateur, vehicule, agence, message, rendez_vous, estimation  # noqa
+    from app.models import utilisateur, vehicule, agence, message, rendez_vous  # noqa
 
     # ── Blueprints ──────────────────────────────────────────────
     from app.routes.vehicules  import bp as bp_vehicules

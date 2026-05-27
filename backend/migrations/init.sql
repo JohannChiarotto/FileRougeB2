@@ -160,23 +160,6 @@ CREATE TABLE rendez_vous (
 );
 
 -- ──────────────────────────────────────────────────────────────
---  DEMANDES D'ESTIMATION (traitement manuel)
--- ──────────────────────────────────────────────────────────────
-CREATE TABLE demandes_estimations (
-    id                SERIAL PRIMARY KEY,
-    marque            VARCHAR(120) NOT NULL,
-    modele            VARCHAR(120) NOT NULL,
-    annee             SMALLINT     NOT NULL,
-    kilometrage       INTEGER      NOT NULL DEFAULT 0,
-    energie           VARCHAR(30)  NOT NULL,
-    email             VARCHAR(150) NOT NULL,
-    statut            VARCHAR(20)  NOT NULL DEFAULT 'en_attente',
-    commentaire_admin TEXT,
-    created_at        TIMESTAMP    DEFAULT NOW(),
-    updated_at        TIMESTAMP    DEFAULT NOW()
-);
-
--- ──────────────────────────────────────────────────────────────
 --  FAVORIS & STATISTIQUES
 -- ──────────────────────────────────────────────────────────────
 
@@ -211,7 +194,6 @@ CREATE INDEX idx_messages_conv       ON messages(conversation_id);
 CREATE INDEX idx_conv_client         ON conversations(client_id);
 CREATE INDEX idx_rdv_agence_date     ON rendez_vous(agence_id, date_heure);
 CREATE INDEX idx_vues_vehicule       ON vues_vehicules(vehicule_id);
-CREATE INDEX idx_demandes_estimation_statut ON demandes_estimations(statut);
 
 -- ──────────────────────────────────────────────────────────────
 --  TRIGGERS : updated_at automatique
@@ -268,10 +250,6 @@ CREATE TRIGGER trg_conversations_updated
 
 CREATE TRIGGER trg_rdv_updated
     BEFORE UPDATE ON rendez_vous
-    FOR EACH ROW EXECUTE FUNCTION update_timestamp();
-
-CREATE TRIGGER trg_demandes_estimations_updated
-    BEFORE UPDATE ON demandes_estimations
     FOR EACH ROW EXECUTE FUNCTION update_timestamp();
 
 -- ──────────────────────────────────────────────────────────────

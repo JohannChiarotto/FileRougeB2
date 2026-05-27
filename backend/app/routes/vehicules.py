@@ -7,7 +7,6 @@ from sqlalchemy import and_, or_
 from app import db
 from app.models.vehicule    import Vehicule, PhotoVehicule
 from app.models.agence      import Marque, Modele
-from app.models.estimation  import DemandeEstimation
 from app.models.utilisateur import Utilisateur
 
 bp = Blueprint("vehicules", __name__)
@@ -270,75 +269,23 @@ def list_modeles():
 # ── POST /api/vehicules/estimate ──────────────────────────────
 @bp.post("/estimate")
 def estimate_vehicule():
-    """Enregistre une demande d'estimation pour traitement humain."""
+    """Simple estimation de valeur de revente basée sur l'âge et le kilométrage.
+
+    Le front-end envoie un JSON contenant au moins ``annee`` et ``kilometrage``
+    (les autres champs peuvent être fournis mais ne sont pas utilisés pour
+    l'instant). Nous appliquons une dépréciation exponentielle de 15 % par
+    année plus une réduction linéaire selon les kilomètres.
+    """
     data = request.get_json() or {}
-    from datetime import date
-    current_year = date.today().year
-
-    marque = (data.get("marque") or "").strip()
-    modele = (data.get("modele") or "").strip()
-    energie = (data.get("energie") or "").strip()
-    email = (data.get("email") or "").strip().lower()
-
-    if not marque or not modele or not energie or not email:
-        return jsonify({"error": "Champs obligatoires manquants"}), 400
-    if "@" not in email or "." not in email.split("@")[-1]:
-        return jsonify({"error": "Adresse email invalide"}), 400
-
     try:
         annee = int(data.get("annee", 0))
         km = int(data.get("kilometrage", 0))
     except (TypeError, ValueError):
         return jsonify({"error": "Champs 'annee' ou 'kilometrage' invalides"}), 400
 
-    if annee < 1980 or annee > current_year + 1:
-        return jsonify({"error": "Annee invalide"}), 400
-    if km < 0:
-        return jsonify({"error": "Kilometrage invalide"}), 400
-
-    demande = DemandeEstimation(
-        marque=marque,
-        modele=modele,
-        annee=annee,
-        kilometrage=km,
-        energie=energie,
-        email=email,
-        statut="en_attente",
-    )
-    db.session.add(demande)
-    db.session.commit()
-
-    return jsonify(
-        {
-            "message": "Votre demande est prise en compte, vous recevrez votre estimation par mail.",
-            "demande_id": demande.id,
-        }
-    ), 201
-
-
-@bp.get("/estimate/requests")
-@require_role("vendeur", "admin")
-def list_estimate_requests():
-    demandes = DemandeEstimation.query.order_by(
-        DemandeEstimation.created_at.desc()
-    ).all()
-    return jsonify([d.to_dict() for d in demandes]), 200
-
-
-@bp.patch("/estimate/requests/<int:demande_id>")
-@require_role("vendeur", "admin")
-def update_estimate_request(demande_id):
-    data = request.get_json() or {}
-    statut = data.get("statut")
-    commentaire_admin = data.get("commentaire_admin")
-
-    valid = ("en_attente", "en_cours", "traitee", "refusee")
-    if statut not in valid:
-        return jsonify({"error": f"Statut invalide. Valeurs: {valid}"}), 400
-
-    demande = DemandeEstimation.query.get_or_404(demande_id)
-    demande.statut = statut
-    if commentaire_admin is not None:
-        demande.commentaire_admin = str(commentaire_admin).strip() or None
-    db.session.commit()
-    return jsonify(demande.to_dict()), 200
+    from datetime import date
+    age = max(0, date.today().year - annee)
+    base_price = 25000.0
+    estimation = base_price * (0.85 ** age) - (km * 0.05)
+    estimation = max(estimation, 0.0)
+    return jsonify({"estimate": round(estimation, 2)}), 200
