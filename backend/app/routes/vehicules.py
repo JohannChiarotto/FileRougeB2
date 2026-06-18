@@ -185,9 +185,19 @@ def update_vehicule(uuid):
 
 # ── DELETE /api/vehicules/<uuid>  (archive seulement) ─────────
 @bp.delete("/<string:uuid>")
-@require_role("admin")
+@jwt_required()
 def delete_vehicule(uuid):
     v = Vehicule.query.filter_by(uuid=uuid).first_or_404()
+
+    uid = int(get_jwt_identity())
+    user = Utilisateur.query.get(uid)
+    if not user:
+        return jsonify({"error": "Accès interdit"}), 403
+
+    # Admin can archive any véhicule; a vendeur can archive only their own annonces
+    if user.role != "admin" and v.vendeur_id != user.id:
+        return jsonify({"error": "Accès interdit"}), 403
+
     v.statut = "archive"
     db.session.commit()
     return jsonify({"message": "Véhicule archivé"}), 200
